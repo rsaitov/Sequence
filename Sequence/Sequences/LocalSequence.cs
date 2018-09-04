@@ -20,7 +20,7 @@ namespace Sequence
         }
         public object Current()
         {
-            string output = "";
+            var output = "";
             foreach (var lexem in Lexems)
             {
                 output += lexem.GetContent(Item);

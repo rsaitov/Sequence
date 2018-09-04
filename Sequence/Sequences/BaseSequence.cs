@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Sequence
 {
     public abstract class BaseSequence
     {
-        private const string CounterLimitReached = "Счётчик достиг максимального значения";
-        private const string NumberLexemNotFound = "Формат счётчика не содержит числовой части";
-        private const string NumberLexemMoreThanOne = "Формат счётчика содержит больше числовой части";
+        private const string CounterLimitReached = "Итератор достиг максимального значения";
+        private const string NumberLexemNotFound = "Формат последовательности не содержит итератора";
+        private const string NumberLexemMoreThanOne = "Формат последовательности содержит больше одного итератора";
 
         protected int Item = 0;
         protected readonly List<ILexem> Lexems;
@@ -44,7 +42,7 @@ namespace Sequence
         }
         private void ThrowExIfNotOneNumberLexem()
         {
-            int numberLexemCount = Lexems.Count(x => x.GetType() == typeof(NumberLexem));
+            var numberLexemCount = Lexems.Count(x => x.GetType() == typeof(NumberLexem));
             if (numberLexemCount == 0)
                 throw new Exception(NumberLexemNotFound);
             if (numberLexemCount > 1)
@@ -60,9 +58,7 @@ namespace Sequence
         }
         private bool IncrementLimitReached(int number, string numberFormat)
         {
-            if (number.ToString().Length > numberFormat.Length)
-                return true;
-            return false;
+            return number.ToString().Length > numberFormat.Length;
         }
     }
 }
