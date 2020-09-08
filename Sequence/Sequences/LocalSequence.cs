@@ -1,4 +1,5 @@
-﻿
+﻿using System.Text;
+
 namespace Sequence
 {
     
@@ -20,13 +21,13 @@ namespace Sequence
         }
         public object Current()
         {
-            var output = "";
+            var output = new StringBuilder();            
             foreach (var lexem in Lexems)
             {
-                output += lexem.GetContent(Item);
+                output.Append(lexem.GetContent(Item));
             }
 
-            return output;
+            return output.ToString();
         }
     }
 }
